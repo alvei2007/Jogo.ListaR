@@ -75,17 +75,17 @@
             font-size: 1.5rem;
             font-weight: bold;
             color: #ffffff;
-            z-index: 10; /* Certificar que o personagem está acima dos obstáculos */
+            z-index: 5; /* Ajustado para alinhar com obstáculos */
         }
 
         .obstacle {
             position: absolute;
-            bottom: 5%;
+            bottom: 10%; /* Alinhado com o personagem */
             width: 8vmin;
             height: 8vmin;
             background-color: #ffcc00;
             box-shadow: 0 0 15px 5px #ffcc00;
-            z-index: 5;
+            z-index: 5; /* Mesmo nível que o personagem */
         }
 
         .obstacle.triangle {
@@ -103,7 +103,6 @@
             background: #000;
             border: 0.3vmin solid #555;
             border-radius: 50%;
-            bottom: 5%;
         }
 
         .score {
@@ -242,7 +241,7 @@
             character.style.bottom = '200px';
 
             setTimeout(() => {
-                character.style.bottom = '20px';
+                character.style.bottom = '10%'; /* Ajustado para alinhar melhor com obstáculos */
                 isJumping = false;
             }, 500);
         };
@@ -267,12 +266,12 @@
             const moveObstacle = setInterval(() => {
                 const obstacleLeft = parseInt(window.getComputedStyle(obstacle).left);
                 const characterBottom = parseInt(window.getComputedStyle(character).bottom);
-                const obstacleBottom = obstacle.offsetTop + obstacle.offsetHeight;
+                const obstacleBottom = parseInt(window.getComputedStyle(obstacle).bottom);
 
-                // Ajuste da lógica de colisão para maior precisão
+                // Lógica ajustada para verificar colisão
                 if (obstacleLeft < 90 && obstacleLeft > 50 &&
-                    ((type === 'hole' && characterBottom < obstacleBottom) ||
-                     (type === 'triangle' && characterBottom < obstacle.offsetHeight))) {
+                    ((type === 'hole' && characterBottom <= obstacleBottom) ||
+                     (type === 'triangle' && characterBottom <= obstacleBottom))) {
                     clearInterval(moveObstacle);
                     endGame();
                 }
