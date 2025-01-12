@@ -34,6 +34,14 @@
             flex-direction: column;
         }
 
+        .start-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+
         .game {
             display: none;
         }
@@ -199,7 +207,6 @@
             document.removeEventListener('touchstart', touchJump);
             clearObstacles();
 
-            // Atualize a melhor pontuação
             if (!bestScores[playerName] || score > bestScores[playerName]) {
                 bestScores[playerName] = score;
                 localStorage.setItem('bestScores', JSON.stringify(bestScores));
@@ -268,7 +275,7 @@
                 }
             }, 30);
 
-            const randomInterval = Math.random() * 2000 + 1000; // Intervalo entre 1s e 3s
+            const randomInterval = Math.random() * 2000 + 1000;
             obstacleTimeout = setTimeout(createObstacle, randomInterval);
         };
 
@@ -277,3 +284,4 @@
     </script>
 </body>
 </html>
+
