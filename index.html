@@ -75,6 +75,7 @@
             font-size: 1.5rem;
             font-weight: bold;
             color: #ffffff;
+            z-index: 10; /* Certificar que o personagem está acima dos obstáculos */
         }
 
         .obstacle {
@@ -84,6 +85,7 @@
             height: 8vmin;
             background-color: #ffcc00;
             box-shadow: 0 0 15px 5px #ffcc00;
+            z-index: 5;
         }
 
         .obstacle.triangle {
@@ -265,10 +267,12 @@
             const moveObstacle = setInterval(() => {
                 const obstacleLeft = parseInt(window.getComputedStyle(obstacle).left);
                 const characterBottom = parseInt(window.getComputedStyle(character).bottom);
+                const obstacleBottom = obstacle.offsetTop + obstacle.offsetHeight;
 
+                // Ajuste da lógica de colisão para maior precisão
                 if (obstacleLeft < 90 && obstacleLeft > 50 &&
-                    ((obstacle.classList.contains('hole') && characterBottom < 70) ||
-                     (!obstacle.classList.contains('hole') && characterBottom < 90))) {
+                    ((type === 'hole' && characterBottom < obstacleBottom) ||
+                     (type === 'triangle' && characterBottom < obstacle.offsetHeight))) {
                     clearInterval(moveObstacle);
                     endGame();
                 }
@@ -290,3 +294,4 @@
     </script>
 </body>
 </html>
+
