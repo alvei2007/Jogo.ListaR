@@ -102,7 +102,7 @@
             height: 3vmin;
             background: #000;
             border: 0.3vmin solid #555;
-            border-radius: 50%;
+            border-radius: 40%;
         }
 
         .score {
@@ -269,7 +269,7 @@
                 const obstacleBottom = parseInt(window.getComputedStyle(obstacle).bottom);
 
                 // Lógica ajustada para verificar colisão
-                if (obstacleLeft < 90 && obstacleLeft > 50 &&
+                if (obstacleLeft < 50 && obstacleLeft > 40 &&
                     ((type === 'hole' && characterBottom <= obstacleBottom) ||
                      (type === 'triangle' && characterBottom <= obstacleBottom))) {
                     clearInterval(moveObstacle);
